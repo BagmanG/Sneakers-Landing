@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Sneakers - Стильные кроссовки для всех</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        :root {
+            --primary-color: #ff6b35;
+            --secondary-color: #2c3e50;
+            --accent-color: #f39c12;
+            --dark-bg: #1a1a1a;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('images/product_0.webp') center/cover;
+            opacity: 0.1;
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .floating-shoe {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        .section-padding {
+            padding: 100px 0;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .btn-custom {
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255,107,53,0.3);
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-left: 5px solid var(--primary-color);
+        }
+        
+        .price-tag {
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 25px;
+            font-weight: bold;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .stats-counter {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+        
+        .navbar-custom {
+            background: rgba(255,255,255,0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+        
+        .product-img {
+            transition: transform 0.3s ease;
+        }
+        
+        .product-img:hover {
+            transform: scale(1.05);
+        }
+        
+        .contact-form {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 40px;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            line-height: 50px;
+            border-radius: 50%;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .stats-counter {
+                font-size: 2rem;
+            }
+        }
+        .text-muted{
+            color: white !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top navbar-custom">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-2" href="#" style="color: var(--primary-color);">
+                <i class="fas fa-shoe-prints me-2"></i>The Sneakers
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="#home">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="#products">Товары</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="#about">О нас</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="#contact">Контакты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i> <span class="badge bg-danger">3</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Главная секция -->
+    <section id="home" class="hero-section d-flex align-items-center">
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="text-white">
+                        <h1 class="display-2 fw-bold mb-4">
+                            Стильные <span style="color: #1a1a1a;">кроссовки</span><br>
+                            для каждого дня
+                        </h1>
+                        <p class="lead mb-5 fs-4">
+                            Откройте для себя коллекцию премиальных кроссовок, которые сочетают комфорт, стиль и инновации. 
+                            Каждый шаг - это шаг к совершенству.
+                        </p>
+                        <div class="d-flex flex-wrap gap-3">
+                            <button class="btn btn-dark btn-lg text-white">
+                                <i class="fas fa-shopping-bag me-2"></i>Купить сейчас
+                            </button>
+                            <button class="btn btn-light btn-lg">
+                                <i class="fas fa-play me-2"></i>Смотреть видео
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="images/product_1.webp" 
+                         alt="Кроссовки" class="img-fluid floating-shoe" style="max-height: 500px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Статистика -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="stats-counter" data-target="10000">0</div>
+                    <p class="fw-semibold">Довольных клиентов</p>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="stats-counter" data-target="500">0</div>
+                    <p class="fw-semibold">Моделей кроссовок</p>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="stats-counter" data-target="50">0</div>
+                    <p class="fw-semibold">Стран доставки</p>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="stats-counter" data-target="5">0</div>
+                    <p class="fw-semibold">Лет опыта</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Особенности -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title">Почему выбирают нас</h2>
+                    <p class="lead">Мы предлагаем больше, чем просто кроссовки</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <h4 class="mb-3">Быстрая доставка</h4>
+                        <p>Доставляем по всей России за 1-3 дня. Бесплатная доставка при заказе от 5000 рублей.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <h4 class="mb-3">Премиум качество</h4>
+                        <p>Только оригинальные кроссовки от мировых брендов с гарантией качества.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h4 class="mb-3">24/7 поддержка</h4>
+                        <p>Наша команда всегда готова помочь вам с выбором и решением любых вопросов.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Товары -->
+    <section id="products" class="section-padding bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title">Популярные модели</h2>
+                    <p class="lead">Откройте для себя наши бестселлеры</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="card card-hover h-100 position-relative">
+                        <div class="price-tag">₽8,990</div>
+                        <img src="images/product_0.webp" 
+                             class="card-img-top product-img" alt="Nike Air Max" loading="lazy">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Nike Air Max 270</h5>
+                            <p class="card-text">Инновационная подошва Air Max для максимального комфорта каждый день.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="text-warning">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <small class="ms-1">(127)</small>
+                                </div>
+                                <button class="btn btn-custom btn-sm">Купить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card card-hover h-100 position-relative">
+                        <div class="price-tag">₽12,490</div>
+                        <img src="images/product_1.webp" 
+                             class="card-img-top product-img" loading="lazy" alt="Adidas Ultraboost">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Adidas Ultraboost 22</h5>
+                            <p class="card-text">Революционная технология Boost для непревзойденного возврата энергии.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="text-warning">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <small class="ms-1">(89)</small>
+                                </div>
+                                <button class="btn btn-custom btn-sm">Купить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card card-hover h-100 position-relative">
+                        <div class="price-tag">₽15,990</div>
+                        <img src="images/product_2.webp" 
+                             class="card-img-top product-img" loading="lazy" alt="Jordan 1">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Air Jordan 1 Retro</h5>
+                            <p class="card-text">Легендарные кроссовки, которые изменили мир баскетбола и стрит-стиля.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="text-warning">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <small class="ms-1">(203)</small>
+                                </div>
+                                <button class="btn btn-custom btn-sm">Купить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <button class="btn btn-dark btn-lg">
+                    <i class="fas fa-eye me-2"></i>Посмотреть все модели
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- О компании -->
+    <section id="about" class="section-padding">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="section-title text-start">О компании The Sneakers</h2>
+                    <p class="lead mb-4">
+                        Мы - команда энтузиастов, которые верят, что правильные кроссовки могут изменить ваш день и вдохновить на новые свершения.
+                    </p>
+                    <p class="mb-4">
+                        С 2019 года мы помогаем тысячам клиентов найти идеальную пару кроссовок. Наша миссия - сделать стильную и качественную обувь доступной для каждого.
+                    </p>
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-3 fs-4"></i>
+                                <span>Только оригинальные товары</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-3 fs-4"></i>
+                                <span>Гарантия качества</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-3 fs-4"></i>
+                                <span>Быстрая доставка</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-3 fs-4"></i>
+                                <span>Поддержка 24/7</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="images/about_us.webp" 
+                         alt="О нас" class="img-fluid rounded-3 shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Отзывы -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title">Отзывы клиентов</h2>
+                    <p class="lead">Что говорят о нас наши покупатели</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="text-warning mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="mb-3">"Заказывал Nike Air Max - качество превосходное! Доставили быстро, упаковка отличная. Обязательно закажу еще!"</p>
+                        <div class="d-flex align-items-center">
+                            <img src="images/review_people_0.webp" 
+                                 alt="Клиент" class="rounded-circle me-3" width="50" height="50">
+                            <div>
+                                <h6 class="mb-0">Алексей К.</h6>
+                                <small>г. Москва</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="text-warning mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="mb-3">"Отличный магазин! Большой выбор, адекватные цены и замечательный сервис. Теперь покупаю только здесь."</p>
+                        <div class="d-flex align-items-center">
+                            <img src="images/review_people_1.webp" 
+                                 alt="Клиент" class="rounded-circle me-3" width="50" height="50">
+                            <div>
+                                <h6 class="mb-0">Мария С.</h6>
+                                <small>г. Санкт-Петербург</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="text-warning mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="mb-3">"Покупал Jordan 1 для сына - он в восторге! Качество на высоте, размер подошел идеально. Спасибо!"</p>
+                        <div class="d-flex align-items-center">
+                            <img src="images/review_people_2.webp" 
+                                 alt="Клиент" class="rounded-circle me-3" width="50" height="50">
+                            <div>
+                                <h6 class="mb-0">Дмитрий П.</h6>
+                                <small>г. Екатеринбург</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contact" class="section-padding bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title">Контакты</h2>
+                    <p class="lead">Мы всегда готовы помочь вам</p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="row g-4">
+                        <div class="col-md-4 text-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h5 class="mb-3">Адрес</h5>
+                            <p>ул. Тверская, 15<br>Москва, 125009</p>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <h5 class="mb-3">Телефон</h5>
+                            <p>+7 (495) 123-45-67<br>+7 (800) 555-35-35</p>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <h5 class="mb-3">Email</h5>
+                            <p>info@thesneakers.ru<br>support@thesneakers.ru</p>
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-12 text-center">
+                            <h5 class="mb-4">Режим работы</h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="fw-semibold">Пн - Пт:</span>
+                                        <span >9:00 - 21:00</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="fw-semibold">Суббота:</span>
+                                        <span >10:00 - 20:00</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="fw-semibold">Воскресенье:</span>
+                                        <span >11:00 - 19:00</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="fw-semibold">Поддержка:</span>
+                                        <span class="text-success fw-bold">24/7</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-5">
+                        <h5 class="mb-3">Мы в социальных сетях</h5>
+                        <div class="social-icons">
+                            <a href="#" class="text-decoration-none">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="text-decoration-none">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="text-decoration-none">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="text-decoration-none">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            <a href="#" class="text-decoration-none">
+                                <i class="fab fa-telegram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="fw-bold mb-4">
+                        <i class="fas fa-shoe-prints me-2" style="color: var(--primary-color);"></i>
+                        The Sneakers
+                    </h5>
+                    <p class="text-muted mb-4" style="color: white;">
+                        Ваш надежный партнер в мире стильной и качественной спортивной обуви. 
+                        Мы делаем каждый шаг особенным.
+                    </p>
+                    <div class="social-icons">
+                        <a href="#" class="text-decoration-none">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-decoration-none">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-decoration-none">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-decoration-none">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h6 class="fw-bold mb-4">Каталог</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Nike</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Adidas</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Jordan</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Puma</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">New Balance</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h6 class="fw-bold mb-4">Информация</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">О компании</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Доставка</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Оплата</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Возврат</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Гарантия</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h6 class="fw-bold mb-4">Подписка на новости</h6>
+                    <p class="text-muted mb-3">
+                        Будьте в курсе новых поступлений и специальных предложений
+                    </p>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Ваш email">
+                        <button class="btn btn-primary" type="button">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-secondary">
+                            <i class="fas fa-shipping-fast me-1"></i>Быстрая доставка
+                        </span>
+                        <span class="badge bg-secondary">
+                            <i class="fas fa-shield-alt me-1"></i>Гарантия качества
+                        </span>
+                        <span class="badge bg-secondary">
+                            <i class="fas fa-headset me-1"></i>24/7 поддержка
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="text-muted mb-0">
+                        &copy; 2025 The Sneakers. Все права защищены.
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="d-flex justify-content-md-end justify-content-start flex-wrap gap-3">
+                        <a href="#" class="text-muted text-decoration-none">Политика конфиденциальности</a>
+                        <a href="#" class="text-muted text-decoration-none">Условия использования</a>
+                        <a href="#" class="text-muted text-decoration-none">Cookie</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Кнопка "Наверх" -->
+    <button type="button" class="btn btn-primary position-fixed bottom-0 end-0 m-4 rounded-circle" 
+            id="backToTop" style="width: 50px; height: 50px; display: none; z-index: 999;">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Кастомный JavaScript -->
+    <script>
+        // Анимация счетчиков
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stats-counter');
+            
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const increment = target / 200;
+                let current = 0;
+                
+                const updateCounter = () => {
+                    if (current < target) {
+                        current += increment;
+                        counter.textContent = Math.ceil(current).toLocaleString();
+                        setTimeout(updateCounter, 10);
+                    } else {
+                        counter.textContent = target.toLocaleString();
+                    }
+                };
+                
+                updateCounter();
+            });
+        }
+
+        // Intersection Observer для анимации счетчиков
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Запуск наблюдения за секцией статистики
+        document.addEventListener('DOMContentLoaded', () => {
+            const statsSection = document.querySelector('.stats-counter').closest('section');
+            if (statsSection) {
+                observer.observe(statsSection);
+            }
+        });
+
+        // Плавная прокрутка для навигации
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Кнопка "Наверх"
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.style.display = 'block';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Анимация появления карточек при скролле
+        const animateOnScroll = () => {
+            const cards = document.querySelectorAll('.card-hover');
+            
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const cardVisible = 150;
+                
+                if (cardTop < window.innerHeight - cardVisible) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        };
+
+        // Инициализация анимации карточек
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.card-hover');
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease';
+            });
+        });
+
+        window.addEventListener('scroll', animateOnScroll);
+
+        // Эффект печати для заголовка
+        const typeWriter = (element, text, speed = 100) => {
+            let i = 0;
+            element.innerHTML = '';
+            
+            const typing = () => {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typing, speed);
+                }
+            };
+            
+            typing();
+        };
+
+        // Добавление эффектов hover для кнопок
+        document.querySelectorAll('.btn-custom').forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px) scale(1.05)';
+            });
+            
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
